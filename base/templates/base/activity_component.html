@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>activity_component</title>
+</head>
+<body>
+<h3>Recent activity</h3>
+     <hr>
+     {% for message in room_messages %}
+     <div>
+         <small><a href="{% url 'user-Profile' message.user.id %}"  >@{{ message.user }}</a>    {{ message.created|timesince }}</small>
+     <small> replied to "{{ message.room }}"   </small>
+
+     <p>{{ message }}</p>
+     {% if request.user == message.user %}
+    <a href="{% url 'deleteMessage'  message.id %}"> Delete </a>
+    {% endif %}
+     <hr>
+     </div>
+{% endfor %}
+</body>
+</html>

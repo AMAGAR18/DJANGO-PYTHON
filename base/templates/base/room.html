@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>room</title>
+    <meta name="viewport" content="width=device-width , initial-scale=1">
+
+</head>
+<body>
+{% extends 'main.html' %}
+{% block content %}
+    <style>
+    .room-container{
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+    </style>
+<div class="room-container">
+<div>
+<h1>{{ room.name }}</h1>
+<p>{{ room.description }}</p>
+
+<div  class="comment-wrapper" >
+<h3>Conversations</h3>
+<hr>
+
+{% for message in room.messages %}
+    <div>
+    {% if request.user == message.user %}
+    <a href="{% url 'deleteMessage'  message.id %}"> Delete </a>
+    {% endif %}
+    <small>@{{ message.user }}    {{ message.created|timesince  }}</small>
+    <p>{{ message.body }}</p>
+    </div>
+
+{% endfor %}
+</div>
+ {% if request.user.is_authenticated %}
+ <div class="comment-form">
+ <form method="POST" action="">
+     <label>
+         {% csrf_token %}
+         <input type="text" name="body" placeholder="Write your message here....."/>
+     </label>
+ </form>
+ </div>
+ {% endif %}
+</div>
+<div>
+    <h3>Participants</h3>
+    <hr>
+    {% for user in participants %}
+    <div>
+    <p>@{{ user.username }}</p>
+    </div>
+    {% endfor %}
+</div>
+    </div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>topic_component</title>
+</head>
+<body>
+<h3>Browse Topics </h3>
+            <hr>
+        <div>
+        <a  href="{% url 'home' %}" >All</a>
+        </div>
+{% for topic in topics %}
+<div>
+<a href="{% url 'home' %}?q={{ topic.name }}">{{ topic.name }}</a>
+</div>
+
+{% endfor %}
+</body>
+</html>

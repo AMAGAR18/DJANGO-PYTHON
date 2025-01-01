@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Room</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+    <h1>Create or Edit a Room</h1>
+    <form method="POST" action="{% url 'create-room' %}">
+        {% csrf_token %}
+
+        <!-- Django Form Rendering -->
+        {{ form.as_p }}
+
+        <!-- Custom Form Elements -->
+
+        <!-- Submit Button -->
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
+
+</body>
+</html>
